@@ -11,7 +11,6 @@ export class UpdateHotelsService {
   ) {}
 
   async execute(id: number, updateHotelDto: UpdateHotelDto) {
-    console.log(id);
     return await this.hotelRepositories.updateHotel(Number(id), updateHotelDto);
   }
 }
