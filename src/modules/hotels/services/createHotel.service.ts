@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateHotelDto } from '../domain/dto/create-hotel.dto';
 import { IHotelRepository } from '../domain/repositories/Ihotel.repositories';
-import { REPOSITORY_TOKEN_CREATE } from '../utils/repositoriesTokens';
+import { REPOSITORY_TOKEN_HOTEL } from '../utils/repositoriesTokens';
 
 @Injectable()
 export class CreateHotelsService {
   constructor(
-    @Inject(REPOSITORY_TOKEN_CREATE)
+    @Inject(REPOSITORY_TOKEN_HOTEL)
     private readonly hotelRepositories: IHotelRepository,
   ) {}
 
