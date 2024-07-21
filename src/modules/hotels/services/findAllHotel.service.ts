@@ -5,9 +5,6 @@ import { InjectRedis } from '@nestjs-modules/ioredis';
 import { Redis } from 'ioredis';
 import { REDIS_HOTEL_KEY } from '../utils/redisKey';
 
-// 1, 2, 3
-// 10, 10 , 10
-
 @Injectable()
 export class FindAllHotelsService {
   constructor(
