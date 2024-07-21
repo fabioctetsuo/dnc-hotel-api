@@ -56,11 +56,9 @@ export class AuthService {
   async reset({ token, password }: AuthResetPasswordDTO) {
     const { valid, decoded } = await this.validateToken(token);
 
-    console.log(valid, decoded);
-
     if (!valid || !decoded) throw new UnauthorizedException('Invalid token');
 
-    const user = await this.userService.update(Number(decoded.sub), {
+    const user: User = await this.userService.update(Number(decoded.sub), {
       password,
     });
 
