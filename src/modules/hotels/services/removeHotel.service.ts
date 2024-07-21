@@ -1,8 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { REPOSITORY_TOKEN_CREATE } from '../utils/repositoriesTokens';
+import { IHotelRepository } from '../domain/repositories/Ihotel.repositories';
 
 @Injectable()
 export class RemoveHotelsService {
-  remove(id: number) {
-    return `This action removes a #${id} hotel`;
+  constructor(
+    @Inject(REPOSITORY_TOKEN_CREATE)
+    private readonly hotelRepositories: IHotelRepository,
+  ) {}
+
+  execute(id: number) {
+    return this.hotelRepositories.deleteHotel(id);
   }
 }
