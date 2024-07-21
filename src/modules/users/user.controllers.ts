@@ -1,16 +1,7 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Patch,
-  Post,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
 import { UserService } from './user.services';
 import { CreateUserDTO } from './domain/dto/createUser.dto';
 import { UpdateUserDTO } from './domain/dto/updateUser.dto';
-import { Response } from 'express';
 import { ParamId } from 'src/shared/decorators/paramId.decorator';
 
 @Controller('users')
@@ -18,8 +9,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  list(@Res() res: Response) {
-    console.log(res);
+  list() {
     return this.userService.list();
   }
 
