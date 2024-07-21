@@ -5,7 +5,6 @@ import { CreateUserDTO } from './domain/dto/createUser.dto';
 import { UpdateUserDTO } from './domain/dto/updateUser.dto';
 import * as bcrypt from 'bcrypt';
 import { userSectectFields } from '../prisma/utils/userSelectFields';
-
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
@@ -46,6 +45,13 @@ export class UserService {
   async delete(id: number) {
     await this.isIdExists(id);
     return await this.prisma.user.delete({ where: { id } });
+  }
+
+  async findByEmail(email: string) {
+    return await this.prisma.user.findUnique({
+      where: { email },
+      select: userSectectFields,
+    });
   }
 
   private async isIdExists(id: number) {
