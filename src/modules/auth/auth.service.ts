@@ -31,7 +31,6 @@ export class AuthService {
 
   async login({ email, password }: AuthLoginDTO) {
     const user = await this.userService.findByEmail(email);
-    console.log(await bcrypt.compare(password, user.password));
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException('Email or password is incorrect');
@@ -80,7 +79,7 @@ export class AuthService {
     return token;
   }
 
-  private async validateToken(token: string): Promise<ValidateTokenDTO> {
+  async validateToken(token: string): Promise<ValidateTokenDTO> {
     try {
       const decoded = await this.jwtService.verifyAsync(token, {
         secret: process.env.JWT_SECRET,
