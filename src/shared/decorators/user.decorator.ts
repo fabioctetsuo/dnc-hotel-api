@@ -10,13 +10,6 @@ export const User = createParamDecorator(
 
     if (!user) throw new NotFoundException('User not found');
 
-    const obj = {
-      nome: 'Lucas',
-      email: 'asdsad',
-    };
-
-    obj['nome'];
-
     if (filter) {
       if (!user[filter]) {
         throw new NotFoundException(`User ${filter} not found`);
