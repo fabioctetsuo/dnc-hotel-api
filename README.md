@@ -182,7 +182,7 @@ npm run prisma:generate
 
 ## Variáveis de ambiente
 
-Duplique o arquivo `.env.example`, retire o `.example` e implemente as vairáveis
+Duplique o arquivo `.env.example`, retire o `.example` e implemente as variáveis, no arquivo `.env`:
 
 ```ts
 DATABASE_URL='postgresql://SEU-USER:SUA-SENHA@localhost:5432/dnc_hotel?schema=public'
