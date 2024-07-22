@@ -1,38 +1,199 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# DNC HOTEL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+O DNC Hotel é um projeto de reserva de hoteis, teremos perfil de user e admin, o user pode fazer reservas e o admin pode criar os hoteis e aceitar as reservas, siga os passos abaixo para baixar o projeto e rodar.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Clone
 
-## Description
+Clone o projeto em sua máquina local:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+ssh:
 
-## Installation
+```bash
+git@github.com:codethi/dnc_hotel.git
+```
+https:
+
+```bash
+https://github.com/codethi/dnc_hotel.git
+```
+
+## Banco de dados
+
+Instale em seu computador local o postgres e o [redis](https://redis.io/docs/latest/develop/).
+
+<details>
+<summary>Instalação do Postgres</summary>
+
+Uma das formas de usar o banco de dados Postgres é instalá-lo em seu computador, mas isso depende do ambiente que você está.
+
+Além de instalar, você precisa saber qual o usuário padrão do postgres no seu computador e é necessário criar uma senha para ele.
+
+No passo a passo abaixo você pode encontrar o que precisa para toda essa instalação.
+
+<details>
+<summary>Windows</summary>
+
+### Windows
+
+1. **Baixar o instalador:**
+    - Acesse o site oficial do PostgreSQL: <https://www.postgresql.org/download/>
+    - Selecione Windows e baixe o instalador.
+2. **Instalar o PostgreSQL:**
+    - Execute o instalador baixado.
+    - Siga os passos do instalador e mantenha as configurações padrão.
+    - Anote a senha do usuário `postgres` que você definir durante a instalação.
+3. **Executar o PostgreSQL:**
+    - Abra o `pgAdmin` ou o `SQL Shell (psql)` que foram instalados com o PostgreSQL.
+    - Para o `SQL Shell (psql)`, insira a senha do usuário `postgres` quando solicitado.
+4. **Verificar usuário e alterar senha:**
+    - No `SQL Shell (psql)`, insira os seguintes comandos:
+
+        ```sql
+        \\du  -- Lista os usuários
+        ALTER USER postgres PASSWORD 'nova_senha';
+        
+        ```
+</details>
+
+<details>
+<summary>macOS</summary>
+
+### macOS
+
+1. **Usar Homebrew para instalar:**
+    - Se ainda não tiver o Homebrew instalado, instale-o com:
+
+        ```
+        /bin/bash -c "$(curl -fsSL <https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh>)"
+        ```
+
+    - Instale o PostgreSQL:
+
+        ```
+        brew install postgresql
+        ```
+
+2. **Iniciar o PostgreSQL:**
+    - Inicie o serviço do PostgreSQL:
+
+        ```
+        brew services start postgresql
+        ```
+
+3. **Executar o PostgreSQL:**
+    - Acesse o `psql`:
+
+        ```
+        psql postgres
+        ```
+
+4. **Verificar usuário e alterar senha:**
+    - No `psql`, insira os seguintes comandos:
+
+        ```sql
+        \\du  -- Lista os usuários
+        ALTER USER postgres PASSWORD 'nova_senha';
+        ```
+</details>
+
+<details>
+<summary>Linux</summary>
+
+### Linux
+
+1. **Usar o gerenciador de pacotes para instalar:**
+    - **Debian/Ubuntu:**
+
+        ```
+        sudo apt update
+        sudo apt install postgresql postgresql-contrib
+        ```
+
+    - **Fedora:**
+
+        ```
+        sudo dnf install postgresql-server postgresql-contrib
+        sudo postgresql-setup --initdb
+        ```
+
+    - **CentOS/RHEL:**
+
+        ```
+        sudo yum install postgresql-server postgresql-contrib
+        sudo postgresql-setup initdb
+        ```
+
+2. **Iniciar o PostgreSQL:**
+    - **Debian/Ubuntu:**
+
+        ```
+        sudo systemctl start postgresql
+        sudo systemctl enable postgresql
+        ```
+
+    - **Fedora/CentOS/RHEL:**
+
+        ```
+        sudo systemctl start postgresql
+        sudo systemctl enable postgresql
+        ```
+
+3. **Executar o PostgreSQL:**
+    - Acesse o `psql`:
+
+        ```
+        sudo -i -u postgres
+        psql
+        ```
+
+4. **Verificar usuário e alterar senha:**
+    - No `psql`, insira os seguintes comandos:
+
+        ```sql
+        \\du  -- Lista os usuários
+        ALTER USER postgres PASSWORD 'nova_senha';
+        ```
+
+</details>
+
+</details>
+
+## Dependencias do projeto
+
+Abra o terminal na pasta do projeto e digite:
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Migrações do banco de dados
+
+Abra o terminal na pasta do projeto e digite:
+
+
+```bash
+npm run migration:run
+```
+Agora crie o cliente do Prisma
+
+```bash
+npm run prisma:generate
+```
+
+## Variáveis de ambiente
+
+Duplique o arquivo `.env.example`, retire o `.example` e implemente as vairáveis
+
+```ts
+DATABASE_URL='postgresql://SEU-USER:SUA-SENHA@localhost:5432/dnc_hotel?schema=public'
+JWT_SECRET='ADICIONE-UMA-CHAVE-SHA256'
+SMTP='smtps://SEU-GMAIL:SUA-SENHA-DE-APP@smtp.gmail.com'
+EMAIL_USER='SEU-GMAIL'
+REDIS_HOST='localhost'
+REDIS_PORT=6379
+```
+
+## Rodando o app
 
 ```bash
 # development
@@ -45,7 +206,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Testes
 
 ```bash
 # unit tests
@@ -58,15 +219,11 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Thiago Lima](https://www.linkedin.com/in/thicode/)
+- Website - [thicode.com.br](https://www.thicode.com.br/links)
 
 ## License
 
