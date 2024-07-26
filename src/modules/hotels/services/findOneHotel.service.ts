@@ -9,6 +9,10 @@ export class FindOneHotelsService {
     private readonly hotelRepositories: IHotelRepository,
   ) {}
   async execute(id: number) {
-    return await this.hotelRepositories.findHotelById(id);
+    const hotel = await this.hotelRepositories.findHotelById(id);
+    if (hotel && hotel.image) {
+      hotel.image = `${process.env.APP_API_URL}/hotel-image/${hotel.image}`;
+    }
+    return hotel;
   }
 }

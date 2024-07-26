@@ -166,6 +166,19 @@ Abra o terminal na pasta do projeto e digite:
 $ npm install
 ```
 
+## Variáveis de ambiente
+
+Duplique o arquivo `.env.example`, retire o `.example` e implemente as variáveis, no arquivo `.env`:
+
+```ts
+DATABASE_URL='postgresql://SEU-USER:SUA-SENHA@localhost:5432/dnc_hotel?schema=public'
+JWT_SECRET='ADICIONE-UMA-CHAVE-SHA256'
+SMTP='smtps://SEU-GMAIL:SUA-SENHA-DE-APP@smtp.gmail.com'
+EMAIL_USER='SEU-GMAIL'
+REDIS_HOST='localhost'
+REDIS_PORT=6379
+```
+
 ## Migrações do banco de dados
 
 Abra o terminal na pasta do projeto e digite:
@@ -178,19 +191,6 @@ Agora crie o cliente do Prisma
 
 ```bash
 npm run prisma:generate
-```
-
-## Variáveis de ambiente
-
-Duplique o arquivo `.env.example`, retire o `.example` e implemente as variáveis, no arquivo `.env`:
-
-```ts
-DATABASE_URL='postgresql://SEU-USER:SUA-SENHA@localhost:5432/dnc_hotel?schema=public'
-JWT_SECRET='ADICIONE-UMA-CHAVE-SHA256'
-SMTP='smtps://SEU-GMAIL:SUA-SENHA-DE-APP@smtp.gmail.com'
-EMAIL_USER='SEU-GMAIL'
-REDIS_HOST='localhost'
-REDIS_PORT=6379
 ```
 
 ## Rodando o app

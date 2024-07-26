@@ -9,6 +9,14 @@ export class FindByNameHotelsService {
     private readonly hotelRepositories: IHotelRepository,
   ) {}
   async execute(name: string) {
-    return await this.hotelRepositories.findHotelByName(name);
+    const hotels = await this.hotelRepositories.findHotelByName(name);
+    const newHotels = hotels.map((hotel) => {
+      if (hotel.image) {
+        hotel.image = `${process.env.APP_API_URL}/hotel-image/${hotel.image}`;
+      }
+      return hotel;
+    });
+
+    return newHotels;
   }
 }

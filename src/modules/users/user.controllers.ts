@@ -18,7 +18,7 @@ import { UpdateUserDTO } from './domain/dto/updateUser.dto';
 import { ParamId } from 'src/shared/decorators/paramId.decorator';
 import { AuthGuard } from 'src/shared/guards/auth.guard';
 import { User } from 'src/shared/decorators/user.decorator';
-import { Role, User as UserType } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { Roles } from 'src/shared/decorators/roles.decorators';
 import { RoleGuard } from 'src/shared/guards/role.guard';
 import { UserMatchGuard } from 'src/shared/guards/userMatch.guard';
@@ -31,8 +31,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  list(@User() user: UserType) {
-    console.log(user);
+  list() {
     return this.userService.list();
   }
 
@@ -71,7 +70,7 @@ export class UserController {
             fileType: 'image/*',
           }),
           new MaxFileSizeValidator({
-            maxSize: 300 * 1024,
+            maxSize: 900 * 1024,
           }),
         ],
       }),

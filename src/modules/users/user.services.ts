@@ -36,6 +36,7 @@ export class UserService {
 
   async show(id: number) {
     const user = await this.isIdExists(id);
+    user.avatar = await this.getAvatarUrl(user);
     return user;
   }
 
@@ -80,6 +81,14 @@ export class UserService {
     const userUpdated = await this.update(id, { avatar: avatarFilename });
 
     return userUpdated;
+  }
+
+  private async getAvatarUrl(user: User): Promise<string | null> {
+    if (!user || !user.avatar) {
+      return null;
+    }
+
+    return `${process.env.APP_API_URL}/user-avatar/${user.avatar}`;
   }
 
   private async isIdExists(id: number) {

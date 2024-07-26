@@ -9,6 +9,14 @@ export class FindByOwnerHotelsService {
     private readonly hotelRepositories: IHotelRepository,
   ) {}
   async execute(id: number) {
-    return await this.hotelRepositories.findHotelByOwner(id);
+    const hotels = await this.hotelRepositories.findHotelByOwner(id);
+    const newHotels = hotels.map((hotel) => {
+      if (hotel.image) {
+        hotel.image = `${process.env.APP_API_URL}/hotel-image/${hotel.image}`;
+      }
+      return hotel;
+    });
+
+    return newHotels;
   }
 }
