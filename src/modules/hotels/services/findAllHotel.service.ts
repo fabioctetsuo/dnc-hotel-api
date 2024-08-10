@@ -6,6 +6,11 @@ import { Redis } from 'ioredis';
 import { REDIS_HOTEL_KEY } from '../utils/redisKey';
 import { Hotel } from '@prisma/client';
 
+const getRedisPaginationKey = (page: number, limit: number) => {
+  const cacheKey = `${REDIS_HOTEL_KEY}-PAGE-${page}-LIMIT-${limit}`;
+  return cacheKey;
+};
+
 @Injectable()
 export class FindAllHotelsService {
   constructor(
@@ -15,9 +20,10 @@ export class FindAllHotelsService {
   ) {}
 
   async execute(page: number = 1, limit: number = 10) {
+    const cacheKey = getRedisPaginationKey(page, limit);
     const offSet = (page - 1) * limit;
 
-    const dataRedis = await this.redis.get(REDIS_HOTEL_KEY);
+    const dataRedis = await this.redis.get(cacheKey);
 
     let data = JSON.parse(dataRedis);
 
@@ -29,7 +35,7 @@ export class FindAllHotelsService {
         }
         return hotel;
       });
-      await this.redis.set(REDIS_HOTEL_KEY, JSON.stringify(data));
+      await this.redis.set(cacheKey, JSON.stringify(data));
     }
 
     const total = await this.hotelRepositories.countHotels();

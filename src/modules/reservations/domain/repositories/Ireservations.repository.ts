@@ -5,6 +5,7 @@ export interface IReservationRepository {
   create(data: CreateReservationDto): Promise<Reservation>;
   findById(id: number): Promise<Reservation>;
   findAll(): Promise<Reservation[]>;
+  findAllByHotel(hotelId: number): Promise<Reservation[]>;
   findByUser(userId: number): Promise<Reservation[]>;
   updateStatus(id: number, status: ReservationStatus): Promise<Reservation>;
 }

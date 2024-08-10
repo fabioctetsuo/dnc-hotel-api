@@ -10,6 +10,7 @@ import { REPOSITORY_TOKEN_RESERVATION } from './utils/repositoriesTokens';
 import { REPOSITORY_TOKEN_HOTEL } from '../hotels/utils/repositoriesTokens';
 import { HotelsRepositories } from '../hotels/infra/hotels.repository';
 import { FindAllReservationsService } from './services/findAllReservations.service';
+import { FindByHotelReservationsService } from './services/findAllByHotel.service';
 import { FindByIdReservationsService } from './services/findByIdReservations.service';
 import { FindByUserReservationsService } from './services/findByUserReservations.service';
 import { UpdateStatusReservationsService } from './services/updateStatusReservations.service';
@@ -22,6 +23,7 @@ import { UpdateStatusReservationsService } from './services/updateStatusReservat
     FindAllReservationsService,
     FindByIdReservationsService,
     FindByUserReservationsService,
+    FindByHotelReservationsService,
     UpdateStatusReservationsService,
     {
       provide: REPOSITORY_TOKEN_RESERVATION,

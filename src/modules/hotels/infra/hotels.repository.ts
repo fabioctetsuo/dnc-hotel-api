@@ -15,10 +15,18 @@ export class HotelsRepositories implements IHotelRepository {
   }
 
   findHotelById(id: number): Promise<Hotel | null> {
-    return this.prisma.hotel.findUnique({
-      where: { id: Number(id) },
-      include: { owner: true },
-    });
+    return this.prisma.hotel
+      .findUnique({
+        where: { id: Number(id) },
+        include: { owner: true },
+      })
+      .then((hotel) => {
+        console.log({ owner: hotel.owner });
+        if (hotel.owner.avatar) {
+          hotel.owner.avatar = `${process.env.APP_API_URL}/user-avatar/${hotel.owner.avatar}`;
+        }
+        return hotel;
+      });
   }
   findHotelByName(name: string): Promise<Hotel[] | null> {
     return this.prisma.hotel.findMany({
