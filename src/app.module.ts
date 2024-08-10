@@ -31,7 +31,7 @@ import { join } from 'path';
     ReservationsModule,
     RedisModule.forRoot({
       type: 'single',
-      url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+      url: `rediss://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     }),
     ServeStaticModule.forRoot(
       {
